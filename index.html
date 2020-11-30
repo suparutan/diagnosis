@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{margin: 0;padding: 0;list-style:none;}
+    h1{
+      text-align: center;
+      font-weight: bold;
+      margin-top: 100px;
+      margin-bottom:20px;
+    }
+    ul{
+      width: 600px;
+      margin: 0 auto;
+    }
+    li{
+      text-align: center;
+      background-color: #eee;
+      font-weight:bold;
+      font-size:22px;
+      padding: 20px 0;
+      margin-bottom:10px ;
+    }
+    .point{
+      margin-top: 100px;
+      display:none;
+      text-align: center;
+      font-size: 30px;
+      font-weight: bold;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1></h1>
+  <ul></ul>
+  <div class ="point">あなたにおすすめのスイーツは<span date-point-num></span>です</div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+  $(function(){
+  let count =0;
+  let point =0;
+  const list=[
+    {
+      "title":"今の気分は?",
+      'anser':[
+        'お腹すいた',
+        '疲れている',
+        'イライラしている',
+        'いいことがあった'
+      ]
+          },
+          {
+      'title':"今の季節は？",
+      'anser':[
+        '春',
+        '夏',
+        '秋',
+        '冬'
+      ]
+          },
+          {
+      'title':"どんな物が食べたい？",
+      'anser':[
+        "甘い物",
+        '辛い物',
+        '美味しい物',
+        '食べたくない'
+      ]
+    }
+  ];
+
+  function render (count){
+$('li').remove();
+$('h1').text(list[count]['title']);
+list[count]['anser'].forEach(function( text ){
+  const li = `<li>${text}</li>`;
+$('ul').append(li);
+});
+  }
+  render(0);
+function pointGet(li_index){
+  switch (li_index){
+  case 0:
+    return 1;
+    break;
+  case 1:
+    return 0;
+    break;
+  case 2:
+    return -1;
+    break;
+  case 3:
+    return 2;
+    break;
+    
+  }
+}
+
+
+function point_text(point){
+  let text ='モンブラン！';
+  if(point>2){
+text='チョコレート！'
+  }
+  if(point<0){
+    text ='餃子'
+  }
+  return text;
+}
+  $('body').on('click','li',function(){
+    const li_index =$('li').index(this);
+    point += pointGet(li_index);
+    if(count < list.length-1){
+    count++;
+    render(count);
+    $
+    }else{
+      $('[date-point-num]').text(point_text(point));
+      $('ul,h1').hide();
+      $('.point').fadeIn();
+      console.log('end!!');
+    }
+  });
+  });
+</script>
+
+</body>
+</html>
